@@ -54,6 +54,9 @@ class PhpBlade
         $this->registerEngineResolver();
     }
 
+    /**
+     * @return \Illuminate\View\Factory
+     */
     public function view()
     {
     	return $this->app['view'];
