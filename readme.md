@@ -33,7 +33,7 @@ echo $blade->view()->make('meta', ['name' => 'John Doe']);
 Now you can easily create a directive by calling the ``compiler()`` function
 
 ```php
-$blade->compiler()->directive('datetime', function ($expression) {
+$blade->bladeCompiler()->directive('datetime', function ($expression) {
     return "<?php echo with({$expression})->format('F d, Y g:i a'); ?>";
 });
 
