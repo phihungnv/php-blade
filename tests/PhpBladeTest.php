@@ -3,16 +3,20 @@
 namespace Tests; 
 
 use Coolpraz\PhpBlade\PhpBlade;
+use PHPUnit\Framework\TestCase;
 
-class PhpBladeTest extends \PHPUnit_Framework_TestCase
+class PhpBladeTest extends TestCase
 {
 	protected $blade;
 
-	public function setUp()
+    /**
+     * @return void
+     */
+	public function setUp(): void
 	{
 		$this->blade = new PhpBlade('tests/views', 'tests/cache');
 
-		$this->blade->compiler()->directive('datetime', function ($expression) {
+		$this->blade->bladeCompiler()->directive('datetime', function ($expression) {
             return "<?php echo with({$expression})->format('F d, Y g:i a'); ?>";
         });
 	}

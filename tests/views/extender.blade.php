@@ -6,8 +6,8 @@ Test Title
 
 @section('content')
 {{-- you must get 'Default' --}}
-{{ isset($name) ? $name : 'Default' }}<br>
-{{ $name or 'Still Default' }}<br>
+{{ $name ?? 'Default' }}<br>
+{{ $name ?? 'Still Default' }}<br>
 
 {{-- it must strip out this XSS sample --}}
 {{ '<script type="text/javascript">alert("Hacked!");</script>' }}<br>

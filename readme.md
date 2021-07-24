@@ -1,7 +1,7 @@
 PHP Blade Template Engine
 =====
 
-The standalone version of latest [Laravel's Blade templating engine](http://laravel.com/docs/5.4/blade) for use outside of Laravel.
+The standalone version of latest [Laravel's Blade templating engine](https://laravel.com/docs/8.x/blade) for use outside of Laravel.
 
 Installation
 ------------
@@ -15,7 +15,7 @@ composer require coolpraz/php-blade
 Usage
 -----
 
-Create a Blade instance by passing it the folder(s) where your view files are located, and a cache folder. Render a template by calling the `make` method. More information about the Blade templating engine can be found on http://laravel.com/docs/5.4/blade.
+Create a Blade instance by passing it the folder(s) where your view files are located, and a cache folder. Render a template by calling the `make` method. More information about the Blade templating engine can be found on https://laravel.com/docs/8.x/blade.
 
 ```php
 require __DIR__ . '/vendor/autoload.php';
@@ -42,7 +42,7 @@ $blade->compiler()->directive('datetime', function ($expression) {
 @datetime($dateObj)
 ```
 
-The Blade instances passes all methods to the internal view factory. So you can use all blade features as described in the [Blade documentation](http://laravel.com/docs/5.3/views), please visit site for more information.
+The Blade instances passes all methods to the internal view factory. So you can use all blade features as described in the [Blade documentation](https://laravel.com/docs/8.x/blade), please visit site for more information.
 
 Integrations
 -----
