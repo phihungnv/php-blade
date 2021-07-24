@@ -21,6 +21,15 @@ class PhpBladeTest extends TestCase
         });
 	}
 
+    /**
+     * @test
+     */
+	function it_can_read_blade_component()
+    {
+        $output = $this->blade->view()->make('component');
+        $this->assertEquals('test-component', trim($output));
+    }
+
 	/** @test */
 	function it_can_read_blade_file_and_display_content()
 	{

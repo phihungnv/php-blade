@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Coolpraz\PhpBlade;
 
@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\Factory as QueueFactoryContract;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\View\Compilers\BladeCompiler;
+use Illuminate\View\Compilers\Compiler;
 use Illuminate\View\DynamicComponent;
 use Illuminate\View\Engines\CompilerEngine;
 use Illuminate\View\Engines\EngineResolver;
@@ -17,17 +18,17 @@ use Illuminate\View\FileViewFinder;
 
 class PhpBlade
 {
-	/**
-	 * Array containing paths where to look for blade files
-	 * @var array
-	 */
-	protected $viewPaths;
+    /**
+     * Array containing paths where to look for blade files
+     * @var array
+     */
+    protected $viewPaths;
 
-	/**
-	 * Location where to store cached views
-	 * @var string
-	 */
-	protected $cachePath;
+    /**
+     * Location where to store cached views
+     * @var string
+     */
+    protected $cachePath;
 
     /**
      * Illuminate Container instance.
@@ -43,11 +44,12 @@ class PhpBlade
      */
     public function __construct($viewPaths, $cachePath)
     {
-        $this->app = new Container();
+        $this->app = Application::getInstance();
         $this->viewPaths = is_string($viewPaths) ? [$viewPaths] : $viewPaths;
         $this->cachePath = $cachePath;
 
         $this->register();
+
     }
 
     /**
@@ -156,9 +158,8 @@ class PhpBlade
      */
     protected function registerViewFinder()
     {
-        $me = $this;
-        $this->app->bind('view.finder', function ($app) use ($me) {
-            return new FileViewFinder($app['files'], $me->viewPaths);
+        $this->app->bind('view.finder', function ($app) {
+            return new FileViewFinder($app['files'], $this->viewPaths);
         });
     }
 
@@ -169,9 +170,8 @@ class PhpBlade
      */
     protected function registerBladeCompiler()
     {
-        $me = $this;
-        $this->app->singleton('blade.compiler', function ($app) use ($me) {
-            return tap(new BladeCompiler($app['files'], $me->cachePath), function ($blade) {
+        $this->app->singleton('blade.compiler', function ($app) {
+            return tap(new BladeCompiler($app['files'], $this->cachePath), function ($blade) {
                 $blade->component('dynamic-component', DynamicComponent::class);
             });
         });
